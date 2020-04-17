@@ -6,8 +6,8 @@ import FormWithFormik from './components/FormWithFormik'
 export default function App() {
 	return (
 		<View style={{height:'100%'}}>
-			{/* <ModalImplement /> */}
-			<FormWithFormik />
+			<ModalImplement />
+			{/* <FormWithFormik /> */}
 		</View>
 	)
 }

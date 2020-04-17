@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
 	input: {
 		borderWidth: 1,
 		borderColor: '#ddd',
-		padding: 10,
-		marginTop: 20,
-		marginBottom: 20,
+		// padding: 10,
+		// marginTop: 20,
+		// marginBottom: 20,
 		fontSize: 18,
 		borderRadius: 6,
 	},
