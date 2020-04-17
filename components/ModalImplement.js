@@ -29,7 +29,7 @@ export default function ModalImplement() {
 const styles = StyleSheet.create({
 	modalOverlay: {
 		flex: 1,
-		backgroundColor: 'rgba(0,0,0,0.5)'
+		backgroundColor: 'rgba(0,0,0,0.6)'
 	},
 	modelContent:{
 		marginTop:'10%',
