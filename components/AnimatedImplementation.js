@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly'
 	},
 	animatedView: {
+		backgroundColor: 'blue'
 	}
 })
