@@ -4,6 +4,7 @@ import ModalImplement from './components/ModalImplement'
 import FormWithFormik from './components/FormWithFormik'
 import AnimatedImplementation from './components/AnimatedImplementation'
 import MovableSquare from './components/MovableSquare'
+import PrioritizeList from './components/PrioritizeList'
 
 export default function App() {
 	return (
@@ -11,7 +12,8 @@ export default function App() {
 			{/* <ModalImplement /> */}
 			{/* <FormWithFormik /> */}
 			{/* <AnimatedImplementation /> */}
-			<MovableSquare />
+			{/* <MovableSquare /> */}
+			<PrioritizeList />
 		</View>
 	)
 }
