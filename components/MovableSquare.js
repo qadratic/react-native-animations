@@ -2,10 +2,12 @@ import React, { useRef } from 'react'
 import { View, Animated, StyleSheet, Dimensions } from 'react-native'
 
 export default function MovableSquare() {
-	// const squareXY = useRef(new Animated.ValueXY({x:0, y:0})).current
-	const squareX = useRef(new Animated.Value(0)).current
 
-	console.log(squareX)
+	const squareTop = Dimensions.get('window').height / 2 - 50
+
+	const squareX = useRef(new Animated.Value(0)).current
+	const squareY = useRef(new Animated.Value(squareTop)).current
+	let squareVarY = 0;
 	return (
 		<View>
 			<Animated.View
@@ -13,6 +15,7 @@ export default function MovableSquare() {
 					...styles.square,
 					transform: [
 						{ translateX: squareX },
+						{ translateY: squareY },
 						{
 							rotate: squareX.interpolate({
 								inputRange: [0, 100],
@@ -21,30 +24,43 @@ export default function MovableSquare() {
 						}
 					],
 				}}
-				// style={{ ...styles.square, top:squareXY.y, left:squareXY.x }}
 				onStartShouldSetResponder={() => true}
 				onMoveShouldSetResponder={() => true}
 
-				onResponderGrant={() => { console.log('responder granted') }}
+				// onResponderGrant={() => { console.log('responder granted') }}
 				onResponderMove={evt => {
-					// console.log(evt.nativeEvent.locationX,evt.nativeEvent.locationY)
-					// console.log(evt.nativeEvent.pageX,evt.nativeEvent.pageY)
 					squareX.setValue(evt.nativeEvent.pageX - 25)
+					squareVarY = evt.nativeEvent.pageX
 				}}
 				onResponderRelease={() => {
-					console.log('leave')
-					Animated.spring(
-						squareX,
-						{
-							toValue: 0,
-							// duration:500
-						}
-					).start()
+					// console.log('leave')
+					// console.log(squareVarY)
+					squareY.setValue(squareTop);
+
+					Animated.parallel([
+						Animated.timing(
+							squareX,
+							{
+								toValue: 0,
+								duration: 500
+							}),
+						Animated.sequence([
+							Animated.timing(
+								squareY,
+								{
+									toValue: squareTop - squareVarY / 2,
+									duration: 250
+								}),
+							Animated.timing(
+								squareY,
+								{
+									toValue: squareTop,
+									duration: 250
+								}),
+						])
+					]).start()
 				}}
-
-
 			>
-
 			</Animated.View>
 		</View>
 	)
@@ -52,7 +68,6 @@ export default function MovableSquare() {
 
 const styles = StyleSheet.create({
 	square: {
-		top: Dimensions.get('window').height / 2 - 50,
 		height: 50,
 		width: 50,
 		backgroundColor: 'red',
