@@ -12,8 +12,8 @@ export default function App() {
 			{/* <ModalImplement /> */}
 			{/* <FormWithFormik /> */}
 			{/* <AnimatedImplementation /> */}
-			<MovableSquare />
-			{/* <PrioritizeList /> */}
+			{/* <MovableSquare /> */}
+			<PrioritizeList />
 		</View>
 	)
 }

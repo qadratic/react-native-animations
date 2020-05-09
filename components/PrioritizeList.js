@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, FlatList, Animated, PanResponder } from 'react-
 
 const priorityList = [{ key: 'one' }, { key: 'two' }, { key: 'three' }, { key: 'four' }, { key: 'five' }, { key: 'six' }, { key: 'seven' },]
 
-export default function PrioritizeList() {
+function DraggableView({ item }) {
 
-	const itemSizeOffset = useRef(new Animated.Value(20)).current
+	const itemSizeOffset = useRef(new Animated.Value(0)).current
 
 	const panResponder = useRef(
 		PanResponder.create({
@@ -13,35 +13,42 @@ export default function PrioritizeList() {
 			onMoveShouldSetPanResponder: () => true,
 
 			onPanResponderGrant: () => {
-				console.log('granted')
-				Animated.timing(itemSizeOffset, {
-					toValue: 30,
-					duration: 100
-				}).start()
-			},
-			onPanResponderMove: (evt, gestureState) => {
-				console.log('moving', evt.nativeEvent.pageY)
-			},
-			onPanResponderRelease: () => {
-				console.log('released')
+				// console.log('granted to ', item)
 				Animated.timing(itemSizeOffset, {
 					toValue: 20,
 					duration: 100
 				}).start()
-				console.log(itemSizeOffset)
+			},
+			onPanResponderMove: (evt, gestureState) => {
+				// console.log('moving', evt.nativeEvent.pageY)
+			},
+			onPanResponderRelease: () => {
+				// console.log('released')
+				Animated.timing(itemSizeOffset, {
+					toValue: 0,
+					duration: 100
+				}).start()
 			},
 		})
 	).current
-
-	const getListItem = ({ item }) =>
+	return (
 		<Animated.View style={{
 			...styles.listItem,
-			// padding: itemSizeOffset
+			elevation: itemSizeOffset
 		}}
 		>
 			<Text style={{ fontSize: 30 }} >{item.key}</Text>
 			<View style={styles.moveItem} {...panResponder.panHandlers} ></View>
 		</Animated.View>
+	)
+}
+
+export default function PrioritizeList() {
+
+	
+
+	const getListItem = ({ item }) =>
+		<DraggableView item={item} />
 
 	return (
 		<View style={styles.container}>
@@ -56,13 +63,14 @@ const styles = StyleSheet.create({
 	},
 	listItem: {
 		padding: 20,
-		marginTop: 5,
+		marginTop: 15,
 		borderColor: 'grey',
 		borderWidth: 1,
 		borderRadius: 10,
 		flex: 1,
 		flexDirection: 'row',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
+		backgroundColor: 'white'
 	},
 	moveItem: {
 		borderColor: 'black',
