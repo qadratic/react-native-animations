@@ -6,7 +6,6 @@ import AnimatedImplementation from './components/AnimatedImplementation'
 import MovableSquare from './components/MovableSquare'
 import PrioritizeList from './components/PrioritizeList'
 import LoginPage from './components/LoginPage'
-import X from './components/X'
 
 export default function App() {
 	return (
